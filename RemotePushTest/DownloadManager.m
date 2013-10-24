@@ -10,6 +10,13 @@
 
 #import "Logger.h"
 
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Please note that you should specify any URL
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#define TARGET_URL @"http://..."
+
+
 @implementation DownloadManager {
     NSURLSession *session_;
     
@@ -46,8 +53,7 @@ static DownloadManager *defaultManager = nil;
     [session_ invalidateAndCancel];
     session_ = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:nil delegateQueue:nil];
     
-    NSString *urlString = @"https://developer.apple.com/jp/devcenter/ios/library/documentation/RemoteNotificationsPG.pdf";
-    NSURL *url = [NSURL URLWithString:urlString];
+    NSURL *url = [NSURL URLWithString:TARGET_URL];
     
     NSURLSessionDownloadTask *downloadTask = [session_ downloadTaskWithURL:url
                                 completionHandler:^(NSURL *targetPath, NSURLResponse *response, NSError *error)
@@ -112,7 +118,7 @@ static DownloadManager *defaultManager = nil;
     }
     completionHandler_ = completionHandler;
     
-    NSURL *url = [NSURL URLWithString:@"https://developer.apple.com/jp/devcenter/ios/library/documentation/RemoteNotificationsPG.pdf"];
+    NSURL *url = [NSURL URLWithString:TARGET_URL];
     
     NSURLSessionDownloadTask *sessionDownloadTask = [session_ downloadTaskWithURL:url];
     if (sessionDownloadTask) {
